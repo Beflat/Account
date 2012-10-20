@@ -9,13 +9,23 @@
 
     <h1>履歴</h1>
     
+{% if messages %}
+    <div class="alert alert-success">
+        <ul>
+{% for success_message in messages %}
+            <li>{{ success_message }}</li>
+{% endfor %}
+        </ul>
+    </div>
+{% endif %}
+    
     <div id="search-form">
         
     </div>
     
     
-    <form action="" method="POST">
-    
+    <form action="{% url account.views.batch %}" method="POST">
+    {% csrf_token %}
         <div id="search-result">
             
             <table id="search-result-table" class="table table-bordered table-striped">
