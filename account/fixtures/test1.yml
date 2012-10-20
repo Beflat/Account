@@ -1,0 +1,8 @@
+- fields: {created: !!timestamp '2012-10-20 01:30:32+00:00', name: "\u5916\u98DF\u8CBB",
+    updated: !!timestamp '2012-10-20 01:30:32+00:00'}
+  model: account.category
+  pk: 1
+- fields: {category: 1, created: !!timestamp '2012-10-20 01:30:59+00:00', logDate: 2012-10-19,
+    memo: test, price: 100, updated: !!timestamp '2012-10-20 01:30:59+00:00'}
+  model: account.accountlog
+  pk: 2
