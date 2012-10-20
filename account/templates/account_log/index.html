@@ -3,67 +3,60 @@
 {% block page_title %}Account Logs{% endblock %}
 {% block content %}
 
-<div class="container-fluid">
-<div class="row-fluid">
-<div class="span12">
 
-    <h1>履歴</h1>
-    
+<h1>履歴</h1>
+
 {% if messages %}
-    <div class="alert alert-success">
-        <ul>
+<div class="alert alert-success">
+    <ul>
 {% for success_message in messages %}
-            <li>{{ success_message }}</li>
+        <li>{{ success_message }}</li>
 {% endfor %}
-        </ul>
-    </div>
+    </ul>
+</div>
 {% endif %}
+
+<div id="search-form">
     
-    <div id="search-form">
+</div>
+
+
+<form action="{% url account.views.batch %}" method="POST">
+{% csrf_token %}
+    <div id="search-result">
+        
+        <table id="search-result-table" class="table table-bordered table-striped">
+            <tr>
+                <th></th>
+                <th>日付</th>
+                <th>カテゴリ</th>
+                <th>金額</th>
+                <th>備考</th>
+            </tr>
+{% for row in list %}
+            <tr>
+                <td><input type="checkbox" name="ids[]" value="{{ row.id }}"></td>
+                <td>{{ row.logDate }}</td>
+                <td>{{ row.category.name }}</td>
+                <td>{{ row.price }}</td>
+                <td>{{ row.memo }}</td>
+            </tr>
+{% endfor %}
+        </table>
+    
+    </div>
+
+
+    <div id="action-box" class="well">
+        <p>チェックした項目に対して以下の処理を実行：</p>
+        <select name="action">
+            <option value="d">削除</option>
+        </select>
+        
+        <input type="submit" name="action" value="実行" class="btn btn-warning">
         
     </div>
-    
-    
-    <form action="{% url account.views.batch %}" method="POST">
-    {% csrf_token %}
-        <div id="search-result">
-            
-            <table id="search-result-table" class="table table-bordered table-striped">
-                <tr>
-                    <th></th>
-                    <th>日付</th>
-                    <th>カテゴリ</th>
-                    <th>金額</th>
-                    <th>備考</th>
-                </tr>
-{% for row in list %}
-                <tr>
-                    <td><input type="checkbox" name="ids[]" value="{{ row.id }}"></td>
-                    <td>{{ row.logDate }}</td>
-                    <td>{{ row.category.name }}</td>
-                    <td>{{ row.price }}</td>
-                    <td>{{ row.memo }}</td>
-                </tr>
-{% endfor %}
-            </table>
-        
-        </div>
 
-
-        <div id="action-box" class="well">
-            
-            <select name="action">
-                <option value="d">削除</option>
-            </select>
-            
-            <input type="submit" name="action" value="実行" class="btn btn-warning">
-            
-        </div>
-    
-    </form>
-
-</div>
-</div>
-</div>
+</form>
 
 {% endblock %}
