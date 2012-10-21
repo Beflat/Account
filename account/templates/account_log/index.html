@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<h1>履歴</h1>
+<h1>LOGS</h1>
 
 {% if messages %}
 <div class="alert alert-success">
@@ -19,7 +19,6 @@
 <div id="search-form">
     
 </div>
-
 
 <form action="{% url account.views.batch %}" method="POST">
 {% csrf_token %}
@@ -50,6 +49,7 @@
     <div id="action-box" class="well">
         <p>チェックした項目に対して以下の処理を実行：</p>
         <select name="action">
+            <option value="-">---選択---</option>
             <option value="d">削除</option>
         </select>
         

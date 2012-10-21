@@ -1,0 +1,18 @@
+
+#submenu {
+    background-color: #e5e5e5;
+    color: #444;
+    display: block;
+    height: 40px;
+    padding: 5px;
+}
+
+#submenu .nav-pills li {
+    background-color: #d5d5d5;
+    margin: 0px 5px;
+}
+
+#submenu .nav-pills li a {
+    color: #222;
+}
+

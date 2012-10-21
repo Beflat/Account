@@ -5,20 +5,45 @@
         <title>{% block page_title %}{% endblock %} - Account System</title>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap/css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap/css/bootstrap-responsive.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/account.css" type="text/css">
     </head>
-    
-    <body>
-<div class="container-fluid">
-<div class="row-fluid">
-<div class="span12">
-        
-        {% block content %}
-        {% endblock %}
 
-</div>
-</div>
-</div>
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+
+<!-- header -->
+                    <div class="navbar navbar-static-top navbar-inverse">
+                        <div class="navbar-inner ">
+                            <a class="brand" href="#">Account System</a>
+                            <ul class="nav">
+                                <li><a href="#">DASH BOARD</a></li>
+                                <li><a href="{% url account.views.index %}">LOGS</a></li>
+                                <li><a href="#">FIXED COST</a></li>
+                                <li><a href="#">CATEGORIES</a></li>
+                                <li><a href="#">SETTINGS</a></li>
+                            </ul>
+                        </div>
+                        <div id="submenu">
+                            <ul class="nav nav-pills">
+                                <li><a href="{% url account.views.new %}">NEW</a></li>
+                                <li><a href="#">IMPORT</a></li>
+                            </ul>
+                        </div>
+                        <div  class="clearfix"></div>
+                    </div>
+<!-- /header -->
+
+<!-- main content -->
+                    {% block content %}
+                    {% endblock %}
+<!-- /main content -->
+
+                </div>
+            </div>
+        </div>
 
     </body>
-    
+
 </html>

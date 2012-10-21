@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block page_title %}Account Logs{% endblock %}
+{% block content %}
+
+
+<h1>New Account Log</h1>
+
+{% if messages %}
+<div class="alert alert-success">
+    <ul>
+{% for success_message in messages %}
+        <li>{{ success_message }}</li>
+{% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form action="{% url account.views.register %}" method="POST">
+{% csrf_token %}
+    <div id="input-form">
+{{ form.management_form }}
+        <table id="search-result-table" class="table table-bordered table-striped">
+{{ form }}
+        </table>
+    
+    <ul class="nav nav-pills">
+        <li><input type="submit" value="登録" class="btn btn-primary"></li>
+        <li><input type="button" value="戻る" class="btn" onClick="location.href='{% url account.views.index %}'"></li>
+    </ul>
+    
+    </div>
+</form>
+
+{% endblock %}
