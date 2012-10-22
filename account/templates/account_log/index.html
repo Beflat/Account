@@ -17,7 +17,12 @@
 {% endif %}
 
 <div id="search-form">
-    
+    <form action="" method="GET">
+        <table class="table table-bordered">
+        {{ form }}
+        </table>
+        <p><input type="submit" value="SEARCH" class="btn btn-primary"></p>
+    </form>
 </div>
 
 <form action="{% url account.views.batch %}" method="POST">

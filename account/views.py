@@ -1,6 +1,7 @@
 # encoding: UTF-8
 # Create your views here.
-from account.forms import AccountLogForm
+from account.forms import AccountLogForm, AccountLogSearchForm
+from account.managers import AccountLogManager
 from account.models import AccountLog
 from django.contrib import messages
 from django.forms.formsets import formset_factory
@@ -12,9 +13,14 @@ import logging
 
 def index(request):
     
-    list = AccountLog.objects.filter().order_by('logDate')
+    #list = AccountLog.objects.filter().order_by('logDate')
+    searchParam = request.GET.dict()
+    manager = AccountLogManager()
+    list = manager.search(**searchParam)
     
-    return render(request, 'account_log/index.html', {'list': list})
+    form = AccountLogSearchForm(searchParam)
+    
+    return render(request, 'account_log/index.html', {'list': list, 'form': form})
 
 
 def batch(request):
