@@ -34,7 +34,7 @@
             </tr>
 {% for row in list %}
             <tr>
-                <td><input type="checkbox" name="ids[]" value="{{ row.id }}"></td>
+                <td><input type="checkbox" name="ids" value="{{ row.id }}"></td>
                 <td>{{ row.logDate }}</td>
                 <td>{{ row.category.name }}</td>
                 <td>{{ row.price }}</td>
@@ -53,7 +53,7 @@
             <option value="d">削除</option>
         </select>
         
-        <input type="submit" name="action" value="実行" class="btn btn-warning">
+        <input type="submit" value="実行" class="btn btn-warning">
         
     </div>
 

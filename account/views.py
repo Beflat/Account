@@ -19,7 +19,14 @@ def index(request):
 
 def batch(request):
     
-    messages.add_message(request, messages.SUCCESS, '処理を実行しました。')
+    type = request.POST.get('action')
+    if type == 'd':
+        AccountLog.objects.filter(id__in=request.POST.getlist('ids')).delete()
+        messages.add_message(request, messages.SUCCESS, '選択したデータを削除しました。')
+    else:
+        messages.add_message(request, messages.ERROR, '無効なコマンドが選択されました。')
+    
+    
     return redirect('account.views.index')
 
 
@@ -45,4 +52,5 @@ def register(request):
     
     messages.add_message(request, messages.ERROR, "結果：" + str(form.errors))
     return render(request, 'account_log/new.html', data)
+
 
