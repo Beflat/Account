@@ -4,10 +4,12 @@ from account.forms import AccountLogForm, AccountLogSearchForm
 from account.managers import AccountLogManager
 from account.models import AccountLog
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.forms.formsets import formset_factory
 from django.forms.models import modelformset_factory
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template.context import RequestContext
 import logging
 
 
@@ -22,10 +24,18 @@ def index(request):
     
     
     manager = AccountLogManager()
-    list = manager.search(**searchParam)
+    search_result = manager.search(**searchParam)
     
+    paginator = Paginator(search_result, 5)
+    page = request.GET.get('page')
+    try:
+        list = paginator.page(page)
+    except PageNotAnInteger:
+        list = paginator.page(1)
+    except EmptyPage:
+        list = paginator.page(paginator.num_pages)
     
-    return render(request, 'account_log/index.html', {'list': list, 'form': form})
+    return render(request, 'account_log/index.html', {'list': list, 'form': form, 'pager': paginator}, context_instance = RequestContext(request))
 
 
 def batch(request):

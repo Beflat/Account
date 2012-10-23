@@ -25,6 +25,24 @@
     </form>
 </div>
 
+<div class="pagination">
+    <ul>
+{% if not list.has_previous %}
+        <li class="disabled"><a href="#">PREV</a></li>
+{% else %}
+        <li class=""><a href="{% url account.views.index %}?page={{ list.previous_page_number }}">PREV</a></li>
+{% endif %}
+{% for p in pager.page_range %}
+        <li class=""><a href="{% url account.views.index %}?page={{ p }}">{{ p }}</a></li>
+{% endfor %}
+{% if not list.has_next %}
+        <li class="disabled"><a href="#">NEXT</a></li>
+{% else %}
+        <li class=""><a href="{% url account.views.index %}?page={{ list.next_page_number }}">NEXT</a></li>
+{% endif %}
+    </ul>
+</div>
+
 <form action="{% url account.views.batch %}" method="POST">
 {% csrf_token %}
     <div id="search-result">
