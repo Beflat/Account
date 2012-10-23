@@ -13,12 +13,17 @@ import logging
 
 def index(request):
     
-    #list = AccountLog.objects.filter().order_by('logDate')
     searchParam = request.GET.dict()
+    
+    form = AccountLogSearchForm(request.GET)
+    searchParam = {}
+    if form.is_valid():
+        searchParam = form.cleaned_data
+    
+    
     manager = AccountLogManager()
     list = manager.search(**searchParam)
     
-    form = AccountLogSearchForm(searchParam)
     
     return render(request, 'account_log/index.html', {'list': list, 'form': form})
 
