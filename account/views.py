@@ -35,7 +35,7 @@ def index(request):
     except EmptyPage:
         list = paginator.page(paginator.num_pages)
     
-    return render(request, 'account_log/index.html', {'list': list, 'form': form, 'pager': paginator}, context_instance = RequestContext(request))
+    return render(request, 'account_log/index.html', {'list': list, 'form': form, 'pager': paginator})
 
 
 def batch(request):
